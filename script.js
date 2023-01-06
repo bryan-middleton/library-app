@@ -35,26 +35,49 @@ addBookToLibrary.prototype = Object.create(Book.prototype);
 function cardContent(bookData,index,div){
     const header = document.createElement("h3");
     const dataList = document.createElement("ul");
+    dataList.setAttribute("id", bookData[index].Title+"List");
     header.textContent = bookData[index].Title;
     for(const key in bookData[index]){
         const li = document.createElement("li");
+        li.setAttribute("id", dataList.id+[key])
         li.textContent = `${key}: ${bookData[index][key]}`;
         dataList.appendChild(li);
     }
     div.appendChild(header);
     div.appendChild(dataList);
     
+    //Remove from DOM and array
     const removeButton = document.createElement("button");
     removeButton.textContent = 'Remove Book';
-    removeButton.onclick = function(){
-        this.parentElement.remove();
-        myLibrary.splice([index],1);
-        console.table(myLibrary);
-    }
+    removeButton.onclick = () =>{ 
+      removeCard(div,index)};
     div.appendChild(removeButton);
+
+    // Toggle read/unread
+    const readToggle = document.createElement("button");
+    
+    readToggle.textContent = "Read/Unread";
+    //readToggle.onclick = () => {
+      //  toggleRead(div,index)};
+    div.appendChild(readToggle);
 }
 
-function removeBook(card){
-    this.parentElement.remove(card);
-    console.log('remove clicked');
+//to do - toggle read function
+function toggleRead(index){
+    if(bookData[index].Read=="Yes"){
+        bookData[index].Read = "No"; 
+      }
+      else{
+        bookData[index].Read = "Yes";
+      }
+      console.table(myLibrary);
+  }
+
+
+function removeCard(index){
+    //console.log(elem);
+    //elem.remove();
+    myLibrary.splice([index],1);
+    displayLibrary(myLibrary);
+    console.table(myLibrary);
 }
