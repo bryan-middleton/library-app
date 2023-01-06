@@ -24,9 +24,26 @@ function displayLibrary(library){
   for(let i=0;i<library.length;i++){
     const div = document.createElement("div");
     div.classList.add("libraryItem");
+    console.log(div, library);
     div.textContent = "book" + i;//debugging
+    cardContent(library, i, div);
     document.getElementById("library-cards").appendChild(div);
   }
 }
 
 addBookToLibrary.prototype = Object.create(Book.prototype);
+
+function cardContent(bookData,index,div){
+    const header = document.createElement("h3");
+    const dataList = document.createElement("ul");
+
+    header.textContent = bookData[index].title;
+    for(const key in bookData[index]){
+        const li = document.createElement("li");
+        li.textContent = `${key}: ${bookData[index][key]}`;
+        console.log(`${key}: ${bookData[key]}`);
+        dataList.appendChild(li);
+    }
+    div.appendChild(header);
+    div.appendChild(dataList);
+}
