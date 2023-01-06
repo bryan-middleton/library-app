@@ -11,9 +11,22 @@ function addBookToLibrary(){
     const newBook = new Book(prompt('enter title'), prompt('enter author'),prompt('number of pages'),prompt('read?'));
     myLibrary.push(newBook);
     console.table(myLibrary);
+    displayLibrary(myLibrary);
 }
 
-Book.prototype.info = function(){
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}.`;
+function displayLibrary(library){
+  //reset grid to display fresh array rather than append on old
+ const cards = document.querySelectorAll(".libraryItem");
+ cards.forEach((card) => {
+   card.remove();  
+  });
+  //iterate through array and create div for each book
+  for(let i=0;i<library.length;i++){
+    const div = document.createElement("div");
+    div.classList.add("libraryItem");
+    div.textContent = "book" + i;//debugging
+    document.getElementById("library-cards").appendChild(div);
+  }
 }
 
+addBookToLibrary.prototype = Object.create(Book.prototype);
