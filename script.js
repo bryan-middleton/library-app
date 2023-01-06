@@ -10,7 +10,7 @@ function Book(title, author, pages, read){
 function addBookToLibrary(){
     const newBook = new Book(prompt('enter title'), prompt('enter author'),prompt('number of pages'),prompt('read?'));
     myLibrary.push(newBook);
-    console.table(myLibrary);
+    console.log(myLibrary);
     displayLibrary(myLibrary);
 }
 
