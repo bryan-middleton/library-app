@@ -1,10 +1,10 @@
 let myLibrary = [];
 
 function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+    this.Title = title;
+    this.Author = author;
+    this.Pages = pages;
+    this.Read = read;
 }
 
 function addBookToLibrary(){
@@ -24,9 +24,8 @@ function displayLibrary(library){
   for(let i=0;i<library.length;i++){
     const div = document.createElement("div");
     div.classList.add("libraryItem");
-    console.log(div, library);
-    div.textContent = "book" + i;//debugging
     cardContent(library, i, div);
+    div.setAttribute("id",library[i].title);
     document.getElementById("library-cards").appendChild(div);
   }
 }
@@ -36,14 +35,26 @@ addBookToLibrary.prototype = Object.create(Book.prototype);
 function cardContent(bookData,index,div){
     const header = document.createElement("h3");
     const dataList = document.createElement("ul");
-
-    header.textContent = bookData[index].title;
+    header.textContent = bookData[index].Title;
     for(const key in bookData[index]){
         const li = document.createElement("li");
         li.textContent = `${key}: ${bookData[index][key]}`;
-        console.log(`${key}: ${bookData[key]}`);
         dataList.appendChild(li);
     }
     div.appendChild(header);
     div.appendChild(dataList);
+    
+    const removeButton = document.createElement("button");
+    removeButton.textContent = 'Remove Book';
+    removeButton.onclick = function(){
+        this.parentElement.remove();
+        myLibrary.splice([index],1);
+        console.table(myLibrary);
+    }
+    div.appendChild(removeButton);
+}
+
+function removeBook(card){
+    this.parentElement.remove(card);
+    console.log('remove clicked');
 }

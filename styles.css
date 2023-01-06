@@ -1,8 +1,32 @@
-*{
-    border: 1px solid red;
+
+
+.main-container{
+    max-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) 6fr;
+    grid-template-rows: 1fr 6fr 1fr;
 }
 
 .library-cards{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+ul {
+    list-style: none;
+}
+
+.header, .footer{
+    grid-column: 1 / 3;
+    background-color: aqua;
+}
+
+.libraryItem{
+    border: 1px, solid darkgray;
+    background-color: floralwhite;
+    max-height: 50%;
+}
+
+.sidebar{
+    background-color: darkorange;
 }
