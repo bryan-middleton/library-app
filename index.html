@@ -14,15 +14,35 @@
     <div id="header" class="header">
         <h1>Library</h1>
     </div>
+  
     <div id="sidebar" class="sidebar">
         <h3>sidebar</h3>
-        <button id="newBook" class="action" onclick="addBookToLibrary()">New Book</button>
+        <button id="displayForm">New Book</button>
     </div>
     <div id="library-cards" class="library-cards"></div>
     
     <div id="footer" class="footer">
         <h2>Footer</h2>
     </div>
+    <dialog id="inputForm">
+      <form id="modalForm">
+        <h3>Enter book details</h3>
+        <p>Title: <input id="bookTitle" value = ""></input></p>
+        <p>Author: <input id="author" value =""></input></p>
+        <p>Number of pages: <input id="pages" value=""></input></p>
+        <p>
+          <label>Read?:
+            <select>
+              <option value ="default">Choose...</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+        <div>
+          <button id= "cancelBtn" value="cancel" formmethod="dialog">Cancel</button>
+          <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+      </form>
+    </dialog>
   </div>
 </body>
 </html>
