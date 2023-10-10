@@ -7,8 +7,72 @@ function Book(title, author, pages, read){
     this.Read = read;
 }
 
-function addBookToLibrary(){
-    const newBook = new Book(prompt('enter title'), prompt('enter author'),prompt('number of pages'),prompt('read?'));
+//Create variables for new book input form 
+
+  const addBookButton = document.getElementById("displayForm");
+  const inputForm = document.getElementById("inputForm");
+  const titleInput = inputForm.querySelector("#bookTitle");
+  const authorInput = inputForm.querySelector("#author");
+  const pagesInput = inputForm.querySelector("#pages");
+  const readSelect = inputForm.querySelector("select")
+  const confirmBtn = inputForm.querySelector("#confirmBtn");
+  const cancelBtn = inputForm.querySelector("#cancelBtn");
+  let buttonPressed = "";
+  let title = "";
+  let author = "";
+  let pages = "";
+  let read = "";
+
+  //open modal form when buton is clicked
+
+  addBookButton.addEventListener("click", ()=>{
+    inputForm.showModal();
+  });
+//set title based on input
+  titleInput.addEventListener("input", (e)=>{
+    title = e.target.value;
+    console.log(title);
+  });
+//set author based on input
+  authorInput.addEventListener("input", (e)=>{
+    author = e.target.value;
+    console.log(author);
+  });
+//set pages based on input
+  pagesInput.addEventListener("input", (e)=>{
+    pages = e.target.value;
+    console.log(pages);
+  });
+//set read based on drop down selection
+  readSelect.addEventListener("change", (e)=>{
+    read = e.target.value;
+    console.log(read);
+  });
+
+  inputForm.addEventListener("close", (e) =>{
+    buttonPressed == "cancel" || title == "" || author == "" || pages == "" || read == "default"
+    ? displayLibrary(myLibrary)//do nothing
+    : addBookToLibrary(title,author,pages,read);
+    document.getElementById("modalForm").reset(); //resets form for next use
+  });
+
+confirmBtn.addEventListener("click", (event) =>{
+   event.preventDefault();
+    inputForm.close(title,author,pages,read);
+ });
+
+ cancelBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  buttonPressed="cancel";
+   inputForm.close();
+});
+
+ 
+
+
+function addBookToLibrary(title,author,pages,read){
+    const newBook = new Book(title,author,pages,read);
+  
     myLibrary.push(newBook);
     console.log(myLibrary);
     displayLibrary(myLibrary);
@@ -57,26 +121,27 @@ function cardContent(bookData,index,div){
     const readToggle = document.createElement("button");
     
     readToggle.textContent = "Read/Unread";
-    //readToggle.onclick = () => {
-      //  toggleRead(div,index)};
+    readToggle.onclick = () => {
+    toggleRead(index)};
     div.appendChild(readToggle);
 }
 
 //to do - toggle read function
 function toggleRead(index){
-    if(bookData[index].Read=="Yes"){
-        bookData[index].Read = "No"; 
+  console.log(index); 
+  console.table(myLibrary);
+  if(myLibrary[index].Read=="Yes"){
+        myLibrary[index].Read = "No"; 
       }
       else{
-        bookData[index].Read = "Yes";
+        myLibrary[index].Read = "Yes";
       }
-      console.table(myLibrary);
-  }
+      displayLibrary(myLibrary);
+    }
 
 
 function removeCard(index){
-    //console.log(elem);
-    //elem.remove();
+    console.log(index);
     myLibrary.splice([index],1);
     displayLibrary(myLibrary);
     console.table(myLibrary);
