@@ -28,16 +28,16 @@ function Book(title, author, pages, read){
 
   inputForm.addEventListener("close", (e) =>{
     //if pressing cancel, does nothing and displays current library
+    console.log(buttonPressed);
     buttonPressed == "cancel"
     ? displayLibrary(myLibrary)//do nothing
     : addBookToLibrary(titleInput.value,authorInput.value,pagesInput.value,readSelect.value);
-    console.table(titleInput.value,authorInput.value,pagesInput.value,readSelect.value);
     document.getElementById("modalForm").reset(); //resets form for next use
   });
 
 
 confirmBtn.addEventListener("click", (event) =>{ 
-  
+  buttonPressed = "confirm";
   //check for valid inputs before allowing form to submit
   if(titleInput.validity.valueMissing || authorInput.validity.valueMissing || pagesInput.validity.valueMissing || readSelect.value == "default"){
   if(titleInput.validity.valueMissing){
@@ -125,7 +125,7 @@ function cardContent(bookData,index,div){
     const header = document.createElement("h3");
     const dataList = document.createElement("ul");
     dataList.setAttribute("id", bookData[index].Title+"List");
-    header.textContent = bookData[index].Title;
+   // header.textContent = bookData[index].Title;
     for(const key in bookData[index]){
         const li = document.createElement("li");
         li.setAttribute("id", dataList.id+[key])
@@ -153,8 +153,6 @@ function cardContent(bookData,index,div){
 
 //to do - toggle read function
 function toggleRead(index){
-  console.log(index); 
-  console.table(myLibrary);
   if(myLibrary[index].Read=="Yes"){
         myLibrary[index].Read = "No"; 
       }
